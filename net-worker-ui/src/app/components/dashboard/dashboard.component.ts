@@ -1,4 +1,6 @@
 import {Component, OnInit} from "@angular/core";
+import {Observable} from "rxjs";
+import {HelloMessage} from "../../model/dashboard";
 import {DashboardService} from "../../services/dashboard.service";
 
 @Component({
@@ -8,10 +10,13 @@ import {DashboardService} from "../../services/dashboard.service";
 })
 export class DashboardComponent implements OnInit {
 
+  private message$: Observable<HelloMessage>;
+
   constructor(private dashboardService: DashboardService) {
   }
 
   ngOnInit() {
+    this.message$ = this.dashboardService.getHelloMessage();
   }
 
 }

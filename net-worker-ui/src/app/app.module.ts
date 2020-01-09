@@ -8,6 +8,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {HttpClientModule} from "@angular/common/http";
 import {SettingsPanelComponent} from "./components/settings-panel/settings-panel.component";
 import {DashboardService} from "./services/dashboard.service";
+import {DashboardRestService} from "./rest/dashboard-rest.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DashboardService} from "./services/dashboard.service";
     BrowserAnimationsModule
   ],
   providers: [
-    DashboardService
+    DashboardService,
+    DashboardRestService,
   ],
   bootstrap: [AppComponent]
 })

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NetworkerApplication {
+public class NetApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NetworkerApplication.class, args);
+        SpringApplication.run(NetApplication.class, args);
     }
 }
