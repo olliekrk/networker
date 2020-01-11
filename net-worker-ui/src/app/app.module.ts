@@ -10,7 +10,7 @@ import {SettingsPanelComponent} from "./components/settings-panel/settings-panel
 import {DashboardService} from "./services/dashboard.service";
 import {DashboardRestService} from "./rest/dashboard-rest.service";
 import {ExamplesComponent} from "./components/examples/examples.component";
-import {MatTabsModule, MatTooltipModule} from "@angular/material";
+import {MatDialogModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatTooltipModule} from "@angular/material";
 import {NavigationBarComponent} from "./components/navigation-bar/navigation-bar.component";
 import {LayoutModule} from "@angular/cdk/layout";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -18,9 +18,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatIconModule} from "@angular/material/icon";
 import {MatListModule} from "@angular/material/list";
-import {EmployeesMainViewComponent} from "./components/manager-views/employees-main-view/employees-main-view.component";
-import {MeetingsMainViewComponent} from "./components/manager-views/meetings-main-view/meetings-main-view.component";
-import {ConferenceRoomsMainViewComponent} from "./components/manager-views/conference-rooms-main-view/conference-rooms-main-view.component";
+import {EmployeesMainViewComponent} from "./components/management/employees-main-view/employees-main-view.component";
+import {MeetingsMainViewComponent} from "./components/management/meetings-main-view/meetings-main-view.component";
+import {ConferenceRoomsMainViewComponent} from "./components/management/conference-rooms-main-view/conference-rooms-main-view.component";
+import {EmployeeEditDialogComponent} from "./components/management/employee-edit-dialog/employee-edit-dialog.component";
+import {EmployeesService} from "./services/employees.service";
+import {EmployeesRestService} from "./rest/employees-rest.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -32,6 +36,7 @@ import {ConferenceRoomsMainViewComponent} from "./components/manager-views/confe
     EmployeesMainViewComponent,
     MeetingsMainViewComponent,
     ConferenceRoomsMainViewComponent,
+    EmployeeEditDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,13 +50,20 @@ import {ConferenceRoomsMainViewComponent} from "./components/manager-views/confe
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     DashboardService,
     DashboardRestService,
+    EmployeesService,
+    EmployeesRestService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EmployeeEditDialogComponent]
 })
 export class AppModule {
 }

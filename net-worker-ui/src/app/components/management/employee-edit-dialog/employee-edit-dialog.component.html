@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content [formGroup]="employeeForm">
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input formControlName="firstName" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last name</mat-label>
+    <input formControlName="lastName" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email address</mat-label>
+    <input formControlName="email" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone number</mat-label>
+    <input formControlName="phone" matInput>
+  </mat-form-field>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button (click)="close()" mat-raised-button>Close</button>
+  <button (click)="save()" color="primary" mat-raised-button>Save</button>
+</mat-dialog-actions>
