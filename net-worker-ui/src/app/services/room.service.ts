@@ -3,7 +3,7 @@ import {Room} from "../model/room";
 import {BehaviorSubject, Observable} from "rxjs";
 import {RoomsRestService} from "../rest/rooms-rest.service";
 import {share, take} from "rxjs/operators";
-import {Employee} from "../model/employee";
+import {Employee, EmployeeId} from "../model/employee";
 
 @Injectable()
 export class RoomService {
@@ -29,5 +29,13 @@ export class RoomService {
 
   createRoom(room: Room): Observable<Room> {
     return this.roomsRest.createRoom(room).pipe(share());
+  }
+
+  updateRoom(room: Room): Observable<Room> {
+    return this.roomsRest.updateRoom(room).pipe(share());
+  }
+
+  deleteRoom(id: number): Observable<void> {
+    return this.roomsRest.deleteRoom(id).pipe(share());
   }
 }

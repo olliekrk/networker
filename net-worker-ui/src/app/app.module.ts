@@ -36,6 +36,7 @@ import {RoomService} from "./services/room.service";
 import {RoomsRestService} from "./rest/rooms-rest.service";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
 import {RoomEditDialogComponent} from "./components/management/room-edit-dialog/room-edit-dialog.component";
+import {RoomInfoBarComponent} from "./components/management/room-info-bar/room-info-bar.component";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {RoomEditDialogComponent} from "./components/management/room-edit-dialog/
     EmployeeEditDialogComponent,
     RoomEditDialogComponent,
     EmployeeInfoBarComponent,
+    RoomInfoBarComponent,
   ],
   imports: [
     BrowserModule,
