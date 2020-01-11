@@ -3,6 +3,7 @@ import {Room} from "../model/room";
 import {Observable} from "rxjs";
 import {RoomsRestService} from "../rest/rooms-rest.service";
 import {share} from "rxjs/operators";
+import {Employee} from "../model/employee";
 
 @Injectable()
 export class RoomService {
@@ -13,6 +14,7 @@ export class RoomService {
   getAllRooms(): Observable<Room[]> {
     return this.roomsRest.getAllRooms().pipe(share());
   }
+
 
   createRoom(room: Room): Observable<Room> {
     return this.roomsRest.createRoom(room).pipe(share());

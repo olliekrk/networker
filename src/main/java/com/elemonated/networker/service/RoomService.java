@@ -3,9 +3,11 @@ package com.elemonated.networker.service;
 import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.persistence.repository.RoomRepository;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,4 +30,11 @@ public class RoomService {
     public Optional<Room> getRoomById (Long id) {
         return roomRepository.findById(id);
     }
+
+    /*
+    public List<Room> getAllRooms() {
+        return Lists.newArrayList(roomRepository.findAll());
+    }
+
+     */
 }

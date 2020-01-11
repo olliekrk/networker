@@ -35,6 +35,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RoomService} from "./services/room.service";
 import {RoomsRestService} from "./rest/rooms-rest.service";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
+import {RoomEditDialogComponent} from "./components/management/room-edit-dialog/room-edit-dialog.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {EmployeeInfoBarComponent} from "./components/management/employee-info-ba
     MeetingsMainViewComponent,
     ConferenceRoomsMainViewComponent,
     EmployeeEditDialogComponent,
+    RoomEditDialogComponent,
     EmployeeInfoBarComponent,
   ],
   imports: [
@@ -77,7 +79,7 @@ import {EmployeeInfoBarComponent} from "./components/management/employee-info-ba
     RoomsRestService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EmployeeEditDialogComponent]
+  entryComponents: [EmployeeEditDialogComponent, RoomEditDialogComponent]
 })
 export class AppModule {
 }

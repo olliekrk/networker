@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content [formGroup]="roomForm">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Capacity</mat-label>
+    <input formControlName="capacity" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Utilities</mat-label>
+    <input formControlName="utilities" matInput>
+  </mat-form-field>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button (click)="close()" mat-raised-button>Close</button>
+  <button (click)="save()" color="primary" mat-raised-button>Save</button>
+</mat-dialog-actions>
