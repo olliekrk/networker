@@ -21,11 +21,16 @@ export class NavigationBarComponent {
       label: "Dashboard",
     },
     {
+      path: "/presence",
+      label: "Presence data",
+    },
+    {
       path: "/settings",
       label: "Settings",
-    }, {
-      path: "/examples",
-      label: "Examples",
+    },
+    {
+      path: "/credentials",
+      label: "Credentials",
     },
   ];
 
