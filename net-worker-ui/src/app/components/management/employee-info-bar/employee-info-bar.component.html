@@ -1,6 +1,6 @@
 <div class="bar-wrapper">
 
-  <span class="bar-title">{{employee.firstName + " " + employee.lastName}}</span>
+  <span class="bar-title">{{getReadableEmployeeName(employee)}}</span>
 
   <div class="bar-buttons">
     <button (click)="editEmployeeDialog()" class="edit-button" mat-mini-fab>

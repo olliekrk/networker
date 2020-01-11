@@ -15,6 +15,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatTabsModule,
   MatTooltipModule
 } from "@angular/material";
@@ -31,15 +32,17 @@ import {ConferenceRoomsMainViewComponent} from "./components/management/conferen
 import {EmployeeEditDialogComponent} from "./components/management/employee-edit-dialog/employee-edit-dialog.component";
 import {EmployeesService} from "./services/employees.service";
 import {EmployeesRestService} from "./rest/employees-rest.service";
-import {ReactiveFormsModule} from "@angular/forms";
 import {RoomService} from "./services/room.service";
 import {RoomsRestService} from "./rest/rooms-rest.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
 import {RoomEditDialogComponent} from "./components/management/room-edit-dialog/room-edit-dialog.component";
 import {RoomInfoBarComponent} from "./components/management/room-info-bar/room-info-bar.component";
 import {PresenceHoursPanelComponent} from "./components/presence-hours-panel/presence-hours-panel.component";
 import {ChartsModule} from "ng2-charts";
 import {PresenceHoursChartComponent} from "./components/presence-hours-chart/presence-hours-chart.component";
+import {ActivityService} from "./services/activity.service";
+import {ActivityRestService} from "./rest/activity-rest.service";
 
 @NgModule({
   declarations: [
@@ -77,8 +80,12 @@ import {PresenceHoursChartComponent} from "./components/presence-hours-chart/pre
     MatInputModule,
     MatProgressSpinnerModule,
     ChartsModule,
+    MatSelectModule,
+    FormsModule,
   ],
   providers: [
+    ActivityService,
+    ActivityRestService,
     DashboardService,
     DashboardRestService,
     EmployeesService,

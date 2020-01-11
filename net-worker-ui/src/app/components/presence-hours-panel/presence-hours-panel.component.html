@@ -1,1 +1,30 @@
-<app-presence-hours-chart></app-presence-hours-chart>
+<div class="selectors-container">
+  <mat-form-field>
+    <mat-label>Select day of week</mat-label>
+    <mat-select [formControl]="dayControl">
+      <mat-option *ngFor="let day of days" [value]="day">
+        {{day}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select an employee</mat-label>
+    <mat-select [formControl]="employeeIdControl">
+      <mat-option *ngFor="let employee of employees$ | async" [value]="employee.id">
+        {{getReadableEmployeeName(employee)}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-divider></mat-divider>
+
+<ng-container *ngIf="chartData$ | async as presenceData; else fallbackState">
+  <app-presence-hours-chart [presenceData]="presenceData" [selectedDay]="dayControl.value">
+  </app-presence-hours-chart>
+</ng-container>
+
+<ng-template #fallbackState>
+  <mat-spinner diameter="100"></mat-spinner>
+</ng-template>

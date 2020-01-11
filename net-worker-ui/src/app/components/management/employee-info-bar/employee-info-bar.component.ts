@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {Employee} from "../../../model/employee";
+import {Employee, getReadableEmployeeName} from "../../../model/employee";
 import {MatDialog} from "@angular/material";
 import {EditorMode} from "../../../model/utils";
 import {EmployeeEditDialogComponent} from "../employee-edit-dialog/employee-edit-dialog.component";
@@ -15,6 +15,7 @@ export class EmployeeInfoBarComponent {
 
   @Input() index: number;
   @Input() employee: Employee;
+  readonly getReadableEmployeeName = getReadableEmployeeName;
 
   constructor(private dialog: MatDialog,
               private employeesService: EmployeesService) {

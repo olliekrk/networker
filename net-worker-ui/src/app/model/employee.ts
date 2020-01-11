@@ -11,3 +11,9 @@ export interface Employee {
 
   phone?: string;
 }
+
+export function getReadableEmployeeName(employee: Employee): string {
+  const firstNamePart = employee.firstName ? employee.firstName + " " : "";
+  const lastNamePart = employee.lastName ? employee.lastName : "";
+  return firstNamePart + lastNamePart;
+}
