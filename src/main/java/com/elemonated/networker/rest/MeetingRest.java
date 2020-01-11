@@ -1,6 +1,8 @@
 package com.elemonated.networker.rest;
 
 
+import com.elemonated.networker.model.MeetingDTO;
+import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Meeting;
 import com.elemonated.networker.service.MeetingService;
 import com.google.common.primitives.Longs;
@@ -30,11 +32,18 @@ public class MeetingRest {
     }
 
      */
-
+    /*
     @PostMapping
-    public Meeting updateMeeting(@RequestBody Meeting newMeeting){
-        return meetingService.addMeeting(newMeeting);
+    public Meeting updateMeeting(@RequestBody MeetingDTO meetingDTO){
+        //czy sa rzeczy z meeting Dto w bazie
+
+        Employee employeeMeetingLeader
+        Meeting meeting = new Meeting();
+
+        //return meetingService.addMeeting(newMeeting);
     }
+
+     */
 
     @DeleteMapping("/{id}")
     public void deleteEmployeeById(@PathVariable String id){

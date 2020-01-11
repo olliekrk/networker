@@ -7,11 +7,13 @@ import java.util.Set;
 
 @Data
 @Entity
-
 public class Meeting {
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    private Room room;
 
 
     @ManyToOne
@@ -20,21 +22,16 @@ public class Meeting {
     @ManyToMany(fetch = FetchType.EAGER)
     Set<Employee> employeesParticipants;
 
-    String subject;
+    private String subject;
 
     //https://www.baeldung.com/hibernate-date-time
-    @Basic
-    @Temporal(TemporalType.DATE)
-    private java.util.Date utilDate;
 
     @Basic
-    @Temporal(TemporalType.TIME)
-    private java.util.Date utilTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date utilTimestamp;
 
-    /*
-    @ManyToOne
-    private Room room;
-     */
+
+
 
 
 }
