@@ -9,6 +9,8 @@ import com.google.common.primitives.Longs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/meeting")
 public class MeetingRest {
@@ -32,18 +34,12 @@ public class MeetingRest {
     }
 
      */
-    /*
+
+
     @PostMapping
-    public Meeting updateMeeting(@RequestBody MeetingDTO meetingDTO){
-        //czy sa rzeczy z meeting Dto w bazie
-
-        Employee employeeMeetingLeader
-        Meeting meeting = new Meeting();
-
-        //return meetingService.addMeeting(newMeeting);
+    public Meeting updateMeeting(@Valid @RequestBody MeetingDTO meetingDTO){
+        return meetingService.addMeeting(meetingDTO);
     }
-
-     */
 
     @DeleteMapping("/{id}")
     public void deleteEmployeeById(@PathVariable String id){
