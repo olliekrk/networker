@@ -3,6 +3,7 @@ import {Room} from "../model/room";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Employee, EmployeeId} from "../model/employee";
 
 @Injectable()
 export class RoomsRestService {
@@ -18,5 +19,13 @@ export class RoomsRestService {
 
   createRoom(room: Room): Observable<Room> {
     return this.httpClient.post<Room>(this.baseUrl, room);
+  }
+
+  updateRoom(room: Room): Observable<Room> {
+    return this.httpClient.post<Room>(this.baseUrl, room);
+  }
+
+  deleteRoom(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

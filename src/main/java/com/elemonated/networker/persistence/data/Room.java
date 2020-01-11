@@ -16,7 +16,7 @@ public class Room {
 
     private String name;
 
-    private String[] utilities;
+    private String description;
 
     private Integer capacity;
 }

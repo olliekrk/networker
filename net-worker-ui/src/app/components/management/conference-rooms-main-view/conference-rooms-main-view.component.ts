@@ -5,41 +5,40 @@ import {filter, switchMap, take, tap} from "rxjs/operators";
 import {RoomService} from "../../../services/room.service";
 import {EditorMode} from "../../../model/utils";
 import {Room} from "../../../model/room";
+import {Observable} from "rxjs";
 
 @Component({
-  selector: "app-rooms-main-view",
-  templateUrl: "./rooms-main-view.component.html",
-  styleUrls: ["./rooms-main-view.component.scss"]
+  selector: "app-conference-rooms-main-view",
+  templateUrl: "./conference-rooms-main-view.component.html",
+  styleUrls: ["./conference-rooms-main-view.component.scss"]
 })
-export class RoomsMainViewComponent implements OnInit {
+export class ConferenceRoomsMainViewComponent implements OnInit {
 
-  employees: Room[] = [];
+  rooms$: Observable<Room[]>;
 
   constructor(private dialog: MatDialog,
-              private employeesService: RoomService) {
+              private roomsService: RoomService) {
   }
 
   ngOnInit() {
-    this.reloadEmployeesList();
+    this.rooms$ = this.roomsService.getRooms();
   }
 
-  createEmployeeDialog(): void {
+
+  createRoomDialog(): void {
     const data = {
       mode: EditorMode.CREATE
     };
 
     this.dialog
-      .open(EmployeeEditDialogComponent, {autoFocus: true, disableClose: true, data: data})
+      .open(RoomEditDialogComponent, {autoFocus: true, disableClose: true, data})
       .afterClosed()
       .pipe(
         filter(result => !!result), // nonEmpty
-        switchMap(employeeToSave => this.employeesService.createEmployee(employeeToSave)),
-        tap(() => this.reloadEmployeesList())
+        switchMap(roomToSave => this.roomsService.createRoom(roomToSave)),
+        tap(() => this.roomsService.reloadRooms())
       ).subscribe();
   }
 
-  private reloadEmployeesList(): void {
-    this.employeesService.getAllEmployees().pipe(take(1))
-      .subscribe(employees => this.employees = employees);
-  }
+
 }

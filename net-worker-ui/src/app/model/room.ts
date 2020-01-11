@@ -3,7 +3,7 @@ export interface Room {
 
   name?: string;
 
-  utilities?: string[];
+  description?: string;
 
   capacity?: number;
 

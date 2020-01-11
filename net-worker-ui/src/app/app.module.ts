@@ -35,6 +35,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RoomService} from "./services/room.service";
 import {RoomsRestService} from "./rest/rooms-rest.service";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
+import {RoomEditDialogComponent} from "./components/management/room-edit-dialog/room-edit-dialog.component";
+import {RoomInfoBarComponent} from "./components/management/room-info-bar/room-info-bar.component";
 import {PresenceHoursPanelComponent} from "./components/presence-hours-panel/presence-hours-panel.component";
 import {ChartsModule} from "ng2-charts";
 import {PresenceHoursChartComponent} from "./components/presence-hours-chart/presence-hours-chart.component";
@@ -50,9 +52,11 @@ import {PresenceHoursChartComponent} from "./components/presence-hours-chart/pre
     MeetingsMainViewComponent,
     ConferenceRoomsMainViewComponent,
     EmployeeEditDialogComponent,
+    RoomEditDialogComponent,
     EmployeeInfoBarComponent,
     PresenceHoursPanelComponent,
     PresenceHoursChartComponent,
+    RoomInfoBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,7 @@ import {PresenceHoursChartComponent} from "./components/presence-hours-chart/pre
     RoomsRestService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EmployeeEditDialogComponent]
+  entryComponents: [EmployeeEditDialogComponent, RoomEditDialogComponent]
 })
 export class AppModule {
 }
