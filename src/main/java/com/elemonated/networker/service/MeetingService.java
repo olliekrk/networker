@@ -8,6 +8,7 @@ import com.elemonated.networker.persistence.repository.MeetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @Service
@@ -30,31 +31,33 @@ public class MeetingService {
         try {
             Optional<Employee> employeeLeader = employeeService.getEmployeeById(meetingDTO.getEmployeeMeetingLeaderID());
             if (employeeLeader.isEmpty()) {
-                throw new Exception();
+                throw new Exception("brak lidera");
             }
             meeting.setEmployeeMeetingLeader(employeeLeader.get());
 
             for (Long id : meetingDTO.getEmployeesParticipantsID()) {
                 Optional<Employee> employee = employeeService.getEmployeeById(id);
                 if (employee.isEmpty()) {
-                    throw new Exception();
+                    throw new Exception("brak zbioru uczesnikow");
                 }
                 meeting.getEmployeesParticipants().add(employee.get());
             }
             Optional<Room> room = roomService.getRoomById(meetingDTO.getRoomID());
             if (room.isEmpty()) {
-                throw new Exception();
+                throw new Exception("brak pokoju");
             }
             meeting.setRoom(room.get());
             meeting.setSubject(meetingDTO.getSubject());
-           // meeting.setUtilTimestamp(meetingDTO.getUtilTimestamp());
+            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampLong());
+            meeting.setSqlTimestamp(sqlTimestampNew);
 
 
         }
         catch(Exception e)
         {
-            //do sth
-            return null;
+            Meeting meetingMock = new Meeting();
+            meetingMock.setSubject(e.getMessage());
+            return meetingRepository.save(meetingMock);
 
         }
         return meetingRepository.save(meeting);

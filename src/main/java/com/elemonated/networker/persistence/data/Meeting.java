@@ -30,8 +30,7 @@ public class Meeting {
     //https://www.baeldung.com/hibernate-date-time
 
     @Basic
-    @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date utilTimestamp;
+    private java.sql.Timestamp sqlTimestamp;
 
 
 

@@ -32,6 +32,8 @@ import {EmployeeEditDialogComponent} from "./components/management/employee-edit
 import {EmployeesService} from "./services/employees.service";
 import {EmployeesRestService} from "./rest/employees-rest.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {RoomService} from "./services/room.service";
+import {RoomsRestService} from "./rest/rooms-rest.service";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
 
 @NgModule({
@@ -71,6 +73,8 @@ import {EmployeeInfoBarComponent} from "./components/management/employee-info-ba
     DashboardRestService,
     EmployeesService,
     EmployeesRestService,
+    RoomService,
+    RoomsRestService
   ],
   bootstrap: [AppComponent],
   entryComponents: [EmployeeEditDialogComponent]

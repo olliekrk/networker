@@ -37,7 +37,7 @@ public class MeetingRest {
 
 
     @PostMapping
-    public Meeting updateMeeting(@Valid @RequestBody MeetingDTO meetingDTO){
+    public Meeting updateMeeting(@RequestBody MeetingDTO meetingDTO){
         return meetingService.addMeeting(meetingDTO);
     }
 

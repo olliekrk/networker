@@ -20,7 +20,7 @@ public class MeetingDTO {
     private String subject;
 
     //https://www.baeldung.com/hibernate-date-time
-    private java.util.Date utilTimestamp;
+    private Long utilTimestampLong;
 
 
 }
