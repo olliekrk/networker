@@ -20,8 +20,8 @@
 
 <mat-divider></mat-divider>
 
-<ng-container *ngIf="chartData$ | async as presenceData; else fallbackState">
-  <app-presence-hours-chart [presenceData]="presenceData" [selectedDay]="dayControl.value">
+<ng-container *ngIf="chartData$ | async as chartDataSets; else fallbackState">
+  <app-presence-hours-chart [barChartData]="chartDataSets">
   </app-presence-hours-chart>
 </ng-container>
 

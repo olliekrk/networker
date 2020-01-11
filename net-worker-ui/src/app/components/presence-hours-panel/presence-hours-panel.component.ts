@@ -6,7 +6,8 @@ import {DayOfWeek} from "../../model/date-time";
 import {FormControl} from "@angular/forms";
 import {ActivityService} from "../../services/activity.service";
 import {PresenceChartData} from "../../model/presence";
-import {filter, switchMap, tap} from "rxjs/operators";
+import {filter, map, switchMap, tap} from "rxjs/operators";
+import {ChartDataSets} from "chart.js";
 
 @Component({
   selector: "app-presence-hours-panel",
@@ -18,7 +19,7 @@ export class PresenceHoursPanelComponent implements OnInit {
   readonly days: DayOfWeek[] = Object.values(DayOfWeek);
 
   employees$: Observable<Employee[]>;
-  chartData$: Observable<PresenceChartData>;
+  chartData$: Observable<ChartDataSets[]>;
 
   employeeIdControl: FormControl = new FormControl();
   dayControl: FormControl = new FormControl(DayOfWeek.Monday);
@@ -30,15 +31,33 @@ export class PresenceHoursPanelComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.chartData$ = this.employeeIdControl.valueChanges.pipe(
+      switchMap(employeeId => this.onEmployeeChange(employeeId)),
+      map(data => this.computeDataSets(data))
+    );
     this.employees$ = this.employeesService.getEmployees().pipe(
-      filter(employees => !!employees),
+      filter(employees => !!employees.length),
       tap(employees => this.employeeIdControl.setValue(employees[0].id))
     );
-    this.chartData$ = this.employeeIdControl.valueChanges.pipe(switchMap(employeeId => this.onEmployeeChange(employeeId)));
+
+    this.employeesService.reloadEmployees();
+    this.dayControl.valueChanges.subscribe(() => this.dumbReload());
   }
 
   private onEmployeeChange(employeeId: EmployeeId): Observable<PresenceChartData> {
     return this.activityService.getPresenceChartDataForEmployee(employeeId);
   }
 
+  private computeDataSets(presenceData: PresenceChartData): ChartDataSets[] {
+    return presenceData.dailyData
+      .filter(dailyData => dailyData.dayOfWeek === this.dayControl.value)
+      .map(dailyData => ({
+        data: dailyData.hourlyData.map(hourlyData => ({x: hourlyData.hour, y: hourlyData.percentage})),
+        label: dailyData.dayOfWeek
+      }));
+  }
+
+  private dumbReload(): void {
+    this.employeeIdControl.setValue(this.employeeIdControl.value);
+  }
 }
