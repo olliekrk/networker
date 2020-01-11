@@ -1,17 +1,28 @@
 import {Injectable} from "@angular/core";
 import {Room} from "../model/room";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {RoomsRestService} from "../rest/rooms-rest.service";
-import {share} from "rxjs/operators";
+import {share, take} from "rxjs/operators";
 import {Employee} from "../model/employee";
 
 @Injectable()
 export class RoomService {
 
+  private rooms$: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
+
   constructor(private roomsRest: RoomsRestService) {
+    this.reloadRooms();
   }
 
-  getAllRooms(): Observable<Room[]> {
+  reloadRooms(): void {
+    this.getAllRooms().pipe(take(1)).subscribe(rooms => this.rooms$.next(rooms));
+  }
+
+  getRooms(): Observable<Room[]> {
+    return this.rooms$.asObservable().pipe(share());
+  }
+
+  private getAllRooms(): Observable<Room[]> {
     return this.roomsRest.getAllRooms().pipe(share());
   }
 

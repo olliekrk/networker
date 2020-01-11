@@ -21,7 +21,7 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rooms$ = this.roomsService.getAllRooms();
+    this.rooms$ = this.roomsService.getRooms();
   }
 
 
@@ -36,13 +36,8 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
       .pipe(
         filter(result => !!result), // nonEmpty
         switchMap(roomToSave => this.roomsService.createRoom(roomToSave)),
-        tap(() => this.reloadRoomsList())
+        tap(() => this.roomsService.reloadRooms())
       ).subscribe();
-  }
-
-  private reloadRoomsList(): void {
-    this.roomsService.getAllRooms().pipe(take(1))
-      .subscribe(rooms => rooms = rooms);
   }
 
 
