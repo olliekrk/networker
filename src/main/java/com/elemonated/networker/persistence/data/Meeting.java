@@ -28,9 +28,12 @@ public class Meeting {
     private String subject;
 
     //https://www.baeldung.com/hibernate-date-time
+    private java.sql.Timestamp sqlTimestampStart;
 
-    @Basic
-    private java.sql.Timestamp sqlTimestamp;
+    private java.sql.Timestamp sqlTimestampEnd;
+
+
+
 
 
 

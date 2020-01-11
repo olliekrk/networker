@@ -21,7 +21,7 @@ export class EmployeesService {
     return this.employees$.asObservable().pipe(share());
   }
 
-  private getAllEmployees(): Observable<Employee[]> {
+  getAllEmployees(): Observable<Employee[]> {
     return this.employeesRest.getAllEmployees().pipe(share());
   }
 

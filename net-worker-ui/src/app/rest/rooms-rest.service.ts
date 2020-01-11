@@ -3,7 +3,6 @@ import {Room} from "../model/room";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Employee, EmployeeId} from "../model/employee";
 
 @Injectable()
 export class RoomsRestService {

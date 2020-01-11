@@ -48,8 +48,10 @@ public class MeetingService {
             }
             meeting.setRoom(room.get());
             meeting.setSubject(meetingDTO.getSubject());
-            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampLong());
-            meeting.setSqlTimestamp(sqlTimestampNew);
+            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampStartLong());
+            meeting.setSqlTimestampStart(sqlTimestampNew);
+            sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampEndLong());
+            meeting.setSqlTimestampEnd(sqlTimestampNew);
 
 
         }
