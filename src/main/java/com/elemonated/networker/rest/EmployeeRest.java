@@ -28,7 +28,7 @@ public class EmployeeRest {
     }
 
     @PostMapping
-    public Employee updateEmployee(Employee newEmployee){
+    public Employee updateEmployee(@RequestBody Employee newEmployee){
         return employeeService.addEmployee(newEmployee);
     }
 
