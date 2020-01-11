@@ -2,10 +2,9 @@ package com.elemonated.networker.rest;
 
 import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.service.EmployeeService;
+import com.google.common.primitives.Longs;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employee")
@@ -26,5 +25,20 @@ public class EmployeeRest {
         mock.setFirstName("John");
         mock.setLastName("Doe");
         return employeeService.addEmployee(mock);
+    }
+
+    @PostMapping
+    public Employee updateEmployee(Employee newEmployee){
+        return employeeService.addEmployee(newEmployee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployeeById(@PathVariable String id){
+        Long idLong = Longs.tryParse(id);
+        if(idLong == null){
+
+        }else{
+            employeeService.deleteEmployee(idLong);
+        }
     }
 }
