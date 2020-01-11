@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {filter, map, shareReplay, withLatestFrom} from "rxjs/operators";
 import {NavigationEnd, Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
-import {LabeledLink} from "../../model/route-utils";
+import {LabeledLink} from "../../model/utils";
 
 @Component({
   selector: "app-navigation-bar",
