@@ -1,0 +1,13 @@
+<div class="bar-wrapper">
+
+  <span class="bar-title">{{meeting.subject}}</span>
+
+  <div class="bar-buttons">
+    <button (click)="editMeetingDialog()" class="edit-button" mat-mini-fab>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="deleteMeeting()" class="delete-button" mat-mini-fab>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

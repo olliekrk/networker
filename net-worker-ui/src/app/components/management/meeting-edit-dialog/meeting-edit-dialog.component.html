@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content [formGroup]="meetingForm">
+  <mat-form-field>
+    <mat-label>Subject</mat-label>
+    <input formControlName="subject" matInput>
+  </mat-form-field>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button (click)="close()" mat-raised-button>Close</button>
+  <button (click)="save()" color="primary" mat-raised-button>Save</button>
+</mat-dialog-actions>

@@ -5,10 +5,12 @@ import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Meeting;
 import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.persistence.repository.MeetingRepository;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,5 +70,9 @@ public class MeetingService {
 
     public void deleteMeeting(long id) {
         meetingRepository.deleteById(id);
+    }
+
+    public List<Meeting> getAllMeetings() {
+        return Lists.newArrayList(meetingRepository.findAll());
     }
 }

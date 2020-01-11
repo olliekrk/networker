@@ -1,0 +1,22 @@
+.bar-wrapper {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+}
+
+.bar-title {
+  letter-spacing: 0.3px;
+  line-height: 30px;
+  align-self: center;
+  flex: 1;
+  padding: 15px;
+}
+
+.bar-buttons {
+  display: flex;
+  align-items: center;
+
+  button {
+    margin: 10px 5px;
+  }
+}

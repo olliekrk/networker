@@ -1,5 +1,8 @@
-<p>meetings-main-view works!</p>
+<div *ngFor="let meeting of meetings$ | async; let i = index" class="meeting-list">
+  <app-meeting-info-bar [meeting]="meeting" [index]="i"></app-meeting-info-bar>
+</div>
 
-<button mat-fab>
+<button (click)="createMeetingDialog()" [matTooltipPosition]="'left'" [matTooltip]="'Add new meeting'" mat-fab>
   <mat-icon>add</mat-icon>
 </button>
+

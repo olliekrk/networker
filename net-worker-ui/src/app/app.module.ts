@@ -43,6 +43,10 @@ import {ChartsModule} from "ng2-charts";
 import {PresenceHoursChartComponent} from "./components/presence-hours-chart/presence-hours-chart.component";
 import {ActivityService} from "./services/activity.service";
 import {ActivityRestService} from "./rest/activity-rest.service";
+import {MeetingEditDialogComponent } from "./components/management/meeting-edit-dialog/meeting-edit-dialog.component";
+import {MeetingRestService} from "./rest/meeting-rest.service";
+import {MeetingInfoBarComponent} from "./components/management/meeting-info-bar/meeting-info-bar.component";
+import {MeetingService} from "./services/meeting.service";
 
 @NgModule({
   declarations: [
@@ -60,6 +64,8 @@ import {ActivityRestService} from "./rest/activity-rest.service";
     PresenceHoursPanelComponent,
     PresenceHoursChartComponent,
     RoomInfoBarComponent,
+    MeetingEditDialogComponent,
+    MeetingInfoBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,10 +97,12 @@ import {ActivityRestService} from "./rest/activity-rest.service";
     EmployeesService,
     EmployeesRestService,
     RoomService,
-    RoomsRestService
+    RoomsRestService,
+    MeetingRestService,
+    MeetingService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EmployeeEditDialogComponent, RoomEditDialogComponent]
+  entryComponents: [EmployeeEditDialogComponent, RoomEditDialogComponent, MeetingEditDialogComponent]
 })
 export class AppModule {
 }

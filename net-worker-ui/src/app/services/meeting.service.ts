@@ -5,7 +5,7 @@ import {MeetingRestService} from "../rest/meeting-rest.service";
 import {share, take} from "rxjs/operators";
 
 @Injectable()
-export class RoomService {
+export class MeetingService {
 
   private rooms$: BehaviorSubject<Meeting[]> = new BehaviorSubject<Meeting[]>([]);
 
@@ -17,7 +17,7 @@ export class RoomService {
     this.getAllMeetings().pipe(take(1)).subscribe(rooms => this.rooms$.next(rooms));
   }
 
-  getRooms(): Observable<Meeting[]> {
+  getMeetings(): Observable<Meeting[]> {
     return this.rooms$.asObservable().pipe(share());
   }
 
@@ -26,7 +26,7 @@ export class RoomService {
   }
 
 
-  createRoom(meeting: Meeting): Observable<Meeting> {
+  createMeeting(meeting: Meeting): Observable<Meeting> {
     return this.meetingsRest.createMeeting(meeting).pipe(share());
   }
 
@@ -37,4 +37,6 @@ export class RoomService {
   deleteMeeting(id: number): Observable<void> {
     return this.meetingsRest.deleteMeeting(id).pipe(share());
   }
+
+
 }
