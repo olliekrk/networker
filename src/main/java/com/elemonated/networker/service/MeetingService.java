@@ -47,7 +47,7 @@ public class MeetingService {
             }
             meeting.setRoom(room.get());
             meeting.setSubject(meetingDTO.getSubject());
-            meeting.setUtilTimestamp(meetingDTO.getUtilTimestamp());
+           // meeting.setUtilTimestamp(meetingDTO.getUtilTimestamp());
 
 
         }

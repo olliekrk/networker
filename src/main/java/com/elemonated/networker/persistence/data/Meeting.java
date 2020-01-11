@@ -1,5 +1,6 @@
 package com.elemonated.networker.persistence.data;
 
+import com.elemonated.networker.model.MeetingDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,6 +9,8 @@ import java.util.Set;
 @Data
 @Entity
 public class Meeting {
+
+
     @Id
     @GeneratedValue
     private Long id;
