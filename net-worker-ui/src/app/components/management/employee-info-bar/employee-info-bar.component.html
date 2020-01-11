@@ -1,0 +1,13 @@
+<div class="bar-wrapper">
+
+  <h4 class="bar-title">{{employee.firstName + " " + employee.lastName}}</h4>
+
+  <div class="bar-buttons">
+    <button (click)="editEmployeeDialog()" class="edit-button" mat-mini-fab>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="deleteEmployee()" class="delete-button" mat-mini-fab>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

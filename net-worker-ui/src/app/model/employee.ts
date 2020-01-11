@@ -1,5 +1,7 @@
+export type EmployeeId = number;
+
 export interface Employee {
-  id?: number;
+  id?: EmployeeId;
 
   firstName?: string;
 
