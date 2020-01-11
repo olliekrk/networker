@@ -21,7 +21,7 @@ public class RoomRest {
     }
 
     @PostMapping
-    public Room addRoom(@Valid @RequestBody Room room){
+    public Room addRoom(@RequestBody Room room){
         return roomService.addRoom(room);
     }
 

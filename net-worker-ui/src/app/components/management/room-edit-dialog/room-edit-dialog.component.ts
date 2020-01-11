@@ -27,7 +27,7 @@ export class RoomEditDialogComponent implements OnInit {
     this.roomForm = this.fb.group({
       id: [this.roomData.id],
       name: [this.roomData.name],
-      utilities: [this.roomData.utilities],
+      description: [this.roomData.description],
       capacity: [this.roomData.capacity],
     });
   }
