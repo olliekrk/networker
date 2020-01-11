@@ -28,6 +28,9 @@ public class EmployeeService {
     }
 
     public Optional<Employee> getEmployeeById(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
         return employeeRepository.findById(id);
     }
 
