@@ -10,7 +10,14 @@ import {SettingsPanelComponent} from "./components/settings-panel/settings-panel
 import {DashboardService} from "./services/dashboard.service";
 import {DashboardRestService} from "./rest/dashboard-rest.service";
 import {ExamplesComponent} from "./components/examples/examples.component";
-import {MatDialogModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatTooltipModule} from "@angular/material";
+import {
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
+  MatTooltipModule
+} from "@angular/material";
 import {NavigationBarComponent} from "./components/navigation-bar/navigation-bar.component";
 import {LayoutModule} from "@angular/cdk/layout";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -25,6 +32,7 @@ import {EmployeeEditDialogComponent} from "./components/management/employee-edit
 import {EmployeesService} from "./services/employees.service";
 import {EmployeesRestService} from "./rest/employees-rest.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +45,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MeetingsMainViewComponent,
     ConferenceRoomsMainViewComponent,
     EmployeeEditDialogComponent,
+    EmployeeInfoBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +64,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     DashboardService,

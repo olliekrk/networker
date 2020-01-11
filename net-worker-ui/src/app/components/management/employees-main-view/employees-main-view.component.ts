@@ -5,6 +5,7 @@ import {filter, switchMap, take, tap} from "rxjs/operators";
 import {EmployeesService} from "../../../services/employees.service";
 import {EditorMode} from "../../../model/utils";
 import {Employee} from "../../../model/employee";
+import {Observable} from "rxjs";
 
 @Component({
   selector: "app-employees-main-view",
@@ -13,14 +14,14 @@ import {Employee} from "../../../model/employee";
 })
 export class EmployeesMainViewComponent implements OnInit {
 
-  employees: Employee[] = [];
+  employees$: Observable<Employee[]>;
 
   constructor(private dialog: MatDialog,
               private employeesService: EmployeesService) {
   }
 
   ngOnInit() {
-    this.reloadEmployeesList();
+    this.employees$ = this.employeesService.getEmployees();
   }
 
   createEmployeeDialog(): void {
@@ -34,12 +35,7 @@ export class EmployeesMainViewComponent implements OnInit {
       .pipe(
         filter(result => !!result), // nonEmpty
         switchMap(employeeToSave => this.employeesService.createEmployee(employeeToSave)),
-        tap(() => this.reloadEmployeesList())
+        tap(() => this.employeesService.reloadEmployees())
       ).subscribe();
-  }
-
-  private reloadEmployeesList(): void {
-    this.employeesService.getAllEmployees().pipe(take(1))
-      .subscribe(employees => this.employees = employees);
   }
 }

@@ -18,6 +18,22 @@ button.mat-fab {
   right: 1.5rem;
 }
 
+button.delete-button {
+  background-color: crimson !important;
+
+  mat-icon {
+    color: white;
+  }
+}
+
+button.edit-button {
+  background-color: chartreuse !important;
+
+  mat-icon {
+    color: white;
+  }
+}
+
 @media(min-width: 1024px) {
   button.mat-fab {
     bottom: 2rem;
@@ -34,5 +50,5 @@ mat-tab-header {
 }
 
 .mat-tab-body-wrapper {
-  height: calc(100vh - #{$toolbarHeight + $tabHeaderHeight});
+  height: calc(99vh - #{$toolbarHeight + $tabHeaderHeight});
 }

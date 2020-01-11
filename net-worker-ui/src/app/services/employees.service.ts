@@ -1,13 +1,24 @@
 import {Injectable} from "@angular/core";
-import {Employee} from "../model/employee";
-import {Observable} from "rxjs";
+import {Employee, EmployeeId} from "../model/employee";
+import {BehaviorSubject, Observable} from "rxjs";
 import {EmployeesRestService} from "../rest/employees-rest.service";
-import {share} from "rxjs/operators";
+import {share, take} from "rxjs/operators";
 
 @Injectable()
 export class EmployeesService {
 
+  private employees$: BehaviorSubject<Employee[]> = new BehaviorSubject<Employee[]>([]);
+
   constructor(private employeesRest: EmployeesRestService) {
+    this.reloadEmployees();
+  }
+
+  reloadEmployees(): void {
+    this.getAllEmployees().pipe(take(1)).subscribe(employees => this.employees$.next(employees));
+  }
+
+  getEmployees(): Observable<Employee[]> {
+    return this.employees$.asObservable().pipe(share());
   }
 
   getAllEmployees(): Observable<Employee[]> {
@@ -16,5 +27,13 @@ export class EmployeesService {
 
   createEmployee(employee: Employee): Observable<Employee> {
     return this.employeesRest.createEmployee(employee).pipe(share());
+  }
+
+  updateEmployee(employee: Employee): Observable<Employee> {
+    return this.employeesRest.updateEmployee(employee).pipe(share());
+  }
+
+  deleteEmployee(id: EmployeeId): Observable<void> {
+    return this.employeesRest.deleteEmployee(id).pipe(share());
   }
 }
