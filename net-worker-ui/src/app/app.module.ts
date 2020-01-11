@@ -9,7 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SettingsPanelComponent} from "./components/settings-panel/settings-panel.component";
 import {DashboardService} from "./services/dashboard.service";
 import {DashboardRestService} from "./rest/dashboard-rest.service";
-import {ExamplesComponent} from "./components/examples/examples.component";
+import {CredentialsComponent} from "./components/credentials/credentials.component";
 import {
   MatDialogModule,
   MatFormFieldModule,
@@ -35,19 +35,24 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RoomService} from "./services/room.service";
 import {RoomsRestService} from "./rest/rooms-rest.service";
 import {EmployeeInfoBarComponent} from "./components/management/employee-info-bar/employee-info-bar.component";
+import {PresenceHoursPanelComponent} from "./components/presence-hours-panel/presence-hours-panel.component";
+import {ChartsModule} from "ng2-charts";
+import {PresenceHoursChartComponent} from "./components/presence-hours-chart/presence-hours-chart.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SettingsPanelComponent,
-    ExamplesComponent,
+    CredentialsComponent,
     NavigationBarComponent,
     EmployeesMainViewComponent,
     MeetingsMainViewComponent,
     ConferenceRoomsMainViewComponent,
     EmployeeEditDialogComponent,
     EmployeeInfoBarComponent,
+    PresenceHoursPanelComponent,
+    PresenceHoursChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,7 @@ import {EmployeeInfoBarComponent} from "./components/management/employee-info-ba
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    ChartsModule,
   ],
   providers: [
     DashboardService,

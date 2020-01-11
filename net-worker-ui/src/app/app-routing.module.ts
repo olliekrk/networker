@@ -2,9 +2,10 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {SettingsPanelComponent} from "./components/settings-panel/settings-panel.component";
-import {ExamplesComponent} from "./components/examples/examples.component";
+import {CredentialsComponent} from "./components/credentials/credentials.component";
 import {EmployeesMainViewComponent} from "./components/management/employees-main-view/employees-main-view.component";
 import {MeetingsMainViewComponent} from "./components/management/meetings-main-view/meetings-main-view.component";
+import {PresenceHoursPanelComponent} from "./components/presence-hours-panel/presence-hours-panel.component";
 
 
 const routes: Routes = [
@@ -18,12 +19,16 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: "presence",
+    component: PresenceHoursPanelComponent
+  },
+  {
     path: "settings",
     component: SettingsPanelComponent
   },
   {
-    path: "examples",
-    component: ExamplesComponent
+    path: "credentials",
+    component: CredentialsComponent
   },
   {
     path: "employees",
