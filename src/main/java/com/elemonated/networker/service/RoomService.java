@@ -1,9 +1,12 @@
 package com.elemonated.networker.service;
 
+import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.persistence.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class RoomService {
@@ -20,5 +23,9 @@ public class RoomService {
 
     public void deleteRoomById(Long id){
         roomRepository.deleteById(id);
+    }
+
+    public Optional<Room> getRoomById (Long id) {
+        return roomRepository.findById(id);
     }
 }
