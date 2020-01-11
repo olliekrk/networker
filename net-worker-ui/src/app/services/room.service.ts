@@ -4,13 +4,14 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {RoomsRestService} from "../rest/rooms-rest.service";
 import {share, take} from "rxjs/operators";
 import {Employee, EmployeeId} from "../model/employee";
+import {EmployeesService} from "./employees.service";
 
 @Injectable()
 export class RoomService {
 
   private rooms$: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
 
-  constructor(private roomsRest: RoomsRestService) {
+  constructor(private roomsRest: RoomsRestService, private employeesService: EmployeesService) {
     this.reloadRooms();
   }
 

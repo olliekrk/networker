@@ -25,7 +25,7 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
   }
 
 
-  createMeetingDialog(): void {
+  createRoomDialog(): void {
     const data = {
       mode: EditorMode.CREATE
     };
