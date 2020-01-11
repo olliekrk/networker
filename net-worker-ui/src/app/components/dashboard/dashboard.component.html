@@ -1,7 +1,17 @@
-<p>dashboard works! great</p>
-
-<button>Nothing happens</button>
-
-<div *ngIf="message$ | async as message">
-  {{message | json}}
-</div>
+<mat-tab-group>
+  <mat-tab class="navigation-tab" label="Employees">
+    <ng-template matTabContent>
+      <app-employees-main-view></app-employees-main-view>
+    </ng-template>
+  </mat-tab>
+  <mat-tab class="navigation-tab" label="Meetings">
+    <ng-template matTabContent>
+      <app-meetings-main-view></app-meetings-main-view>
+    </ng-template>
+  </mat-tab>
+  <mat-tab class="navigation-tab" label="Conference rooms">
+    <ng-template matTabContent>
+      <app-conference-rooms-main-view></app-conference-rooms-main-view>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
