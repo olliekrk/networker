@@ -1,0 +1,25 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    class="sidenav"
+    fixedInViewport>
+    <mat-toolbar>Main menu</mat-toolbar>
+    <mat-nav-list>
+      <a *ngFor="let tab of navigationLinks" [routerLink]="tab.path" mat-list-item routerLinkActive>
+        {{tab.label}}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button (click)="drawer.toggle()" *ngIf="isHandset$ | async" [matTooltip]="'Expand menu'"
+        class="menu-button"
+        mat-icon-button
+        type="button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Welcome to the NetWorker!</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

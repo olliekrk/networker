@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+$toolbarHeight: 56px;
+$tabHeaderHeight: 49px;
+
 html, body {
   height: 100%;
 }
@@ -7,4 +10,29 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+button.mat-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+@media(min-width: 1024px) {
+  button.mat-fab {
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+
+mat-toolbar {
+  height: $toolbarHeight;
+}
+
+mat-tab-header {
+  height: $tabHeaderHeight;
+}
+
+.mat-tab-body-wrapper {
+  height: calc(100vh - #{$toolbarHeight + $tabHeaderHeight});
 }
