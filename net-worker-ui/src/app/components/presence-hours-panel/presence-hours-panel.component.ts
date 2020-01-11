@@ -30,7 +30,7 @@ export class PresenceHoursPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.employees$ = this.employeesService.getAllEmployees().pipe(
+    this.employees$ = this.employeesService.getEmployees().pipe(
       filter(employees => !!employees),
       tap(employees => this.employeeIdControl.setValue(employees[0].id))
     );

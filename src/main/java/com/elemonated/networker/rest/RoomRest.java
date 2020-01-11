@@ -1,12 +1,10 @@
 package com.elemonated.networker.rest;
 
-import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
