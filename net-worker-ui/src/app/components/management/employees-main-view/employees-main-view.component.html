@@ -1,3 +1,7 @@
+<div *ngFor="let employee of employees; let i = index">
+  {{i}}: {{employee | json}}
+</div>
+
 <button (click)="createEmployeeDialog()" [matTooltipPosition]="'left'" [matTooltip]="'Add new employee'" mat-fab>
   <mat-icon>add</mat-icon>
 </button>

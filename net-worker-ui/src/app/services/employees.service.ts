@@ -10,6 +10,10 @@ export class EmployeesService {
   constructor(private employeesRest: EmployeesRestService) {
   }
 
+  getAllEmployees(): Observable<Employee[]> {
+    return this.employeesRest.getAllEmployees().pipe(share());
+  }
+
   createEmployee(employee: Employee): Observable<Employee> {
     return this.employeesRest.createEmployee(employee).pipe(share());
   }

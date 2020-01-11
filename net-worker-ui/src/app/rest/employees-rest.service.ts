@@ -12,6 +12,10 @@ export class EmployeesRestService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getAllEmployees(): Observable<Employee[]> {
+    return this.httpClient.get<Employee[]>(this.baseUrl + "/all");
+  }
+
   createEmployee(employee: Employee): Observable<Employee> {
     return this.httpClient.post<Employee>(this.baseUrl, employee);
   }

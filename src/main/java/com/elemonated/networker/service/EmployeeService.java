@@ -2,10 +2,11 @@ package com.elemonated.networker.service;
 
 import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.repository.EmployeeRepository;
-import com.sun.xml.bind.v2.model.core.ID;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +27,14 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Optional<Employee> getEmployeeById (Long id) {
+    public Optional<Employee> getEmployeeById(Long id) {
+        if (id == null) {
+            return Optional.empty();
+        }
         return employeeRepository.findById(id);
     }
 
+    public List<Employee> getAllEmployees() {
+        return Lists.newArrayList(employeeRepository.findAll());
+    }
 }

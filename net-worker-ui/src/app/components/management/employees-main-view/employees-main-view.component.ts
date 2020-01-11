@@ -1,9 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material";
 import {EmployeeEditDialogComponent} from "../employee-edit-dialog/employee-edit-dialog.component";
-import {filter, switchMap} from "rxjs/operators";
+import {filter, switchMap, take, tap} from "rxjs/operators";
 import {EmployeesService} from "../../../services/employees.service";
 import {EditorMode} from "../../../model/utils";
+import {Employee} from "../../../model/employee";
 
 @Component({
   selector: "app-employees-main-view",
@@ -12,14 +13,17 @@ import {EditorMode} from "../../../model/utils";
 })
 export class EmployeesMainViewComponent implements OnInit {
 
+  employees: Employee[] = [];
+
   constructor(private dialog: MatDialog,
               private employeesService: EmployeesService) {
   }
 
   ngOnInit() {
+    this.reloadEmployeesList();
   }
 
-  createEmployeeDialog() {
+  createEmployeeDialog(): void {
     const data = {
       mode: EditorMode.CREATE
     };
@@ -29,7 +33,13 @@ export class EmployeesMainViewComponent implements OnInit {
       .afterClosed()
       .pipe(
         filter(result => !!result), // nonEmpty
-        switchMap(employeeToSave => this.employeesService.createEmployee(employeeToSave))
+        switchMap(employeeToSave => this.employeesService.createEmployee(employeeToSave)),
+        tap(() => this.reloadEmployeesList())
       ).subscribe();
+  }
+
+  private reloadEmployeesList(): void {
+    this.employeesService.getAllEmployees().pipe(take(1))
+      .subscribe(employees => this.employees = employees);
   }
 }
