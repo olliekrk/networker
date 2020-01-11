@@ -46,7 +46,12 @@ public class TaskService {
 
     public Task updateCompletionDate(Long taskId) throws Exception {
         Optional<Task> task = taskRepository.findById(taskId);
-
+        if(task.isEmpty()){
+            throw new Exception("Task is not found!");
+        }
+        if(task.get().getEmployee() == null){
+            throw new Exception("Task is not started!");
+        }
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         task.get().setCompletionTimestamp(timestamp);
 

@@ -44,7 +44,7 @@ public class TaskRest {
         try {
             return taskService.updateCompletionDate(id);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task Not Found", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
     }
 }
