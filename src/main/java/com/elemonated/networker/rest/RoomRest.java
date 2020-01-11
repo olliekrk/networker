@@ -30,12 +30,12 @@ public class RoomRest {
         roomService.deleteRoomById(id);
     }
 
-    /*
+
     @GetMapping("/all")
     public List<Room> getAllRooms() {
         return roomService.getAllRooms();
     }
-    */
+
     @GetMapping("/{id}")
     public Optional<Room> getRoomById(@PathVariable Long id) {
         return roomService.getRoomById(id);

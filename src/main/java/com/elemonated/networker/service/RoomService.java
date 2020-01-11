@@ -31,10 +31,9 @@ public class RoomService {
         return roomRepository.findById(id);
     }
 
-    /*
+
     public List<Room> getAllRooms() {
         return Lists.newArrayList(roomRepository.findAll());
     }
 
-     */
 }
