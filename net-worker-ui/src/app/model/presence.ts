@@ -6,8 +6,8 @@ export interface PresenceHourlyInfo {
 }
 
 export interface PresenceDailyInfo {
-  hourlyData: PresenceHourlyInfo[],
   dayOfWeek: DayOfWeek,
+  hourlyData: PresenceHourlyInfo[],
 }
 
 export interface PresenceChartData {
