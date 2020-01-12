@@ -20,4 +20,9 @@ export class GoogleRestService {
   getCalendarIds(): Observable<GoogleCalendarId[]> {
     return this.httpClient.get<GoogleCalendarId[]>(`${this.calendarUrl}/all`);
   }
+
+  deleteCalendar(calendarId: GoogleCalendarId): Observable<void> {
+    const params = new HttpParams().set("calendarName", calendarId);
+    return this.httpClient.delete<void>(this.calendarUrl, {params});
+  }
 }

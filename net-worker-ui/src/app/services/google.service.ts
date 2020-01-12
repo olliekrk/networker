@@ -24,7 +24,11 @@ export class GoogleService {
     return this.calendarIds$.asObservable().pipe(share());
   }
 
+  deleteCalendar(calendarId: GoogleCalendarId): Observable<void> {
+    return this.googleRestService.deleteCalendar(calendarId).pipe(share());
+  }
+
   private fetchCalendarIds(): Observable<GoogleCalendarId[]> {
-    return this.googleRestService.getCalendarIds();
+    return this.googleRestService.getCalendarIds().pipe(share());
   }
 }

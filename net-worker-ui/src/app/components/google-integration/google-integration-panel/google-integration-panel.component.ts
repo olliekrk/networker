@@ -32,4 +32,9 @@ export class GoogleIntegrationPanelComponent implements OnInit {
         switchMap(calendarId => this.googleService.importCalendar(calendarId))
       ).subscribe(() => this.googleService.reloadCalendars());
   }
+
+  deleteCalendar(calendarId: GoogleCalendarId) {
+    this.googleService.deleteCalendar(calendarId)
+      .subscribe(() => this.googleService.reloadCalendars());
+  }
 }

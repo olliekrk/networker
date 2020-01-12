@@ -1,6 +1,10 @@
 <div class="wrapper">
   <div *ngFor="let calendarId of calendars$ | async">
     {{calendarId}}
+
+    <button (click)="deleteCalendar(calendarId)" class="delete-button" mat-mini-fab>
+      Delete calender
+    </button>
   </div>
 
   <button (click)="importCalendarDialog()" mat-raised-button>
