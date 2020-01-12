@@ -1,12 +1,11 @@
 package com.elemonated.networker.rest;
 
+import com.elemonated.networker.model.ActivityDTO;
 import com.elemonated.networker.model.presence.PresenceData;
+import com.elemonated.networker.persistence.data.Activity;
 import com.elemonated.networker.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/activity")
@@ -17,6 +16,11 @@ public class ActivityRest {
     @Autowired
     public ActivityRest(ActivityService activityService) {
         this.activityService = activityService;
+    }
+
+    @PostMapping
+    public Activity createActivity(@RequestBody ActivityDTO activityDTO) {
+        return activityService.saveActivity(activityDTO);
     }
 
     @GetMapping("/presence/{employeeId}")
