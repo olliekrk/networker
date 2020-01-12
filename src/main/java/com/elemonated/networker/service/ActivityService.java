@@ -77,53 +77,9 @@ public class ActivityService {
                 .map(ActivityService::getHourlyActivityGranulation)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
-//
-//        Map<DayOfWeek, Set<Instant>> aggregatedData = allRecordedActivitiesData
-//                .stream()
-//                .collect(
-//                        HashMap::new,
-//                        (acc, element) -> {
-//                            DayOfWeek dayOfWeek = element.atOffset(ZoneOffset.UTC).getDayOfWeek();
-//                            acc.computeIfAbsent(dayOfWeek, __ -> new HashSet<>());
-//                            acc.get(dayOfWeek).add(element);
-//                        },
-//                        (accA, accB) -> accB.forEach((key, value) -> {
-//                            accA.computeIfAbsent(key, __ -> new HashSet<>());
-//                            accA.get(key).addAll(value);
-//                        })
-//                );
-//
-//        Map<DayOfWeek, Map<Integer, Integer>> countedData = aggregatedData.entrySet()
-//                .stream()
-//                .map(entry -> Map.entry(
-//                        entry.getKey(),
-//                        entry.getValue().stream().collect(
-//                                (Supplier<HashMap<Integer, Integer>>) HashMap::new,
-//                                (acc, element) -> {
-//                                    int hour = element.atOffset(ZoneOffset.UTC).getHour();
-//                                    acc.put(hour, acc.getOrDefault(hour, 0) + 1);
-//                                },
-//                                (accA, accB) -> accB.forEach((hour, value) -> accA.put(hour, accA.getOrDefault(hour, 0) + value))
-//                        )))
-//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-//
-//        Integer maxHourlyValue = countedData
-//                .values()
-//                .stream()
-//                .map(acc -> acc.values().stream().max(Integer::compareTo).orElse(0))
-//                .max(Integer::compareTo).orElse(1);
-//
-//        List<PresenceDailyInfo> collectedData = countedData.entrySet().stream().map(entry ->
-//                new PresenceDailyInfo(
-//                        entry.getKey().name(),
-//                        entry.getValue().entrySet().stream()
-//                                .map(hourEntry -> new PresenceHourlyInfo(hourEntry.getKey(), hourEntry.getValue().doubleValue() / maxHourlyValue))
-//                                .collect(Collectors.toList())
-//                )
-//        ).collect(Collectors.toList());
 
         PresenceData computedResult = computePresenceData(allRecordedActivitiesData);
-        logger.info("Computed activity data:" + computedResult);
+        logger.debug("Computed activity data:" + computedResult);
         return computedResult;
     }
 

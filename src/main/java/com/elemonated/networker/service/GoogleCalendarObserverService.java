@@ -11,6 +11,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.HttpStatusCodes;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -22,8 +23,10 @@ import com.google.api.services.calendar.model.CalendarList;
 import com.google.api.services.calendar.model.CalendarListEntry;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
+import com.google.common.collect.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +39,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.stream.Collectors;
 
 @Component
 public class GoogleCalendarObserverService implements CommandLineRunner {
@@ -103,7 +107,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
 
     @Scheduled(fixedRate = 5000)
     public void checkForUpdates() {
-        if(service == null){
+        if (service == null) {
             return;
         }
         for (GoogleCalendar calendar : calendars) {
@@ -116,11 +120,15 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
         }
     }
 
+    public List<String> getAllCalendarIds() {
+        return Streams.stream(googleCalendarRepository.findAll()).map(GoogleCalendar::getCalendarId).collect(Collectors.toList());
+    }
+
     private void checkForUpdatesInCalendar(GoogleCalendar calendar) throws IOException {
 
         Calendar.Events.List request = service.events().list(calendar.getCalendarId());
 
-        if(calendar.getSyncToken() != null){
+        if (calendar.getSyncToken() != null) {
             request.setSyncToken(calendar.getSyncToken());
         }
 
@@ -131,7 +139,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
             try {
                 events = request.execute();
             } catch (GoogleJsonResponseException e) {
-                if (e.getStatusCode() == 410) {
+                if (e.getStatusCode() == HttpStatus.GONE.value()) {
                     // A 410 status code, "Gone", indicates that the sync token is invalid.
                     System.out.println("Invalid sync token, clearing event store and re-syncing.");
                     updateCalendarSyncToken(calendar, null);
@@ -164,7 +172,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
 
             }
             pageToken = events.getNextPageToken();
-        }while(pageToken != null);
+        } while (pageToken != null);
         updateCalendarSyncToken(calendar, events.getNextSyncToken());
     }
 
@@ -184,7 +192,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
         throw new Exception("Calendar not found!");
     }
 
-    private void updateCalendarSyncToken(GoogleCalendar calendar, String syncToken){
+    private void updateCalendarSyncToken(GoogleCalendar calendar, String syncToken) {
         calendar.setSyncToken(syncToken);
         googleCalendarRepository.save(calendar);
     }
@@ -200,9 +208,9 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
         }
     }
 
-    public void deleteCalendar(String calendarName) throws Exception{
-        for(GoogleCalendar calendar: calendars){
-            if(calendar.getCalendarSummary().equals(calendarName)){
+    public void deleteCalendar(String calendarName) throws Exception {
+        for (GoogleCalendar calendar : calendars) {
+            if (calendar.getCalendarSummary().equals(calendarName)) {
                 googleCalendarRepository.deleteById(calendar.getCalendarId());
                 calendars.remove(calendar);
                 return;

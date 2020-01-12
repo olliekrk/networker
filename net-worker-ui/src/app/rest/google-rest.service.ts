@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {environment} from "../../environments/environment";
 import {GoogleCalendarId} from "../model/google";
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable()
 export class GoogleRestService {
@@ -13,7 +13,8 @@ export class GoogleRestService {
   }
 
   importCalendar(calendarId: GoogleCalendarId): Observable<GoogleCalendarId> {
-    return this.httpClient.post<GoogleCalendarId>(`${this.calendarUrl}`, calendarId);
+    const params = new HttpParams().set("calendarName", calendarId);
+    return this.httpClient.post<GoogleCalendarId>(`${this.calendarUrl}`, {}, {params});
   }
 
   getCalendarIds(): Observable<GoogleCalendarId[]> {
