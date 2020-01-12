@@ -10,7 +10,6 @@ import {EmployeesService} from "./employees.service";
 export class RoomService {
 
   private rooms$: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
-
   constructor(private roomsRest: RoomsRestService, private employeesService: EmployeesService) {
     this.reloadRooms();
   }
@@ -23,7 +22,7 @@ export class RoomService {
     return this.rooms$.asObservable().pipe(share());
   }
 
-  private getAllRooms(): Observable<Room[]> {
+  getAllRooms(): Observable<Room[]> {
     return this.roomsRest.getAllRooms().pipe(share());
   }
 

@@ -16,6 +16,7 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
 
   rooms$: Observable<Room[]>;
 
+
   constructor(private dialog: MatDialog,
               private roomsService: RoomService) {
   }

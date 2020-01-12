@@ -5,6 +5,22 @@
     <mat-label>Subject</mat-label>
     <input formControlName="subject" matInput>
   </mat-form-field>
+  <mat-form-field>
+  <mat-label>Select an employee to be a meeting leader</mat-label>
+  <mat-select formControlName="employeeMeetingLeaderID">
+    <mat-option *ngFor="let employee of employees$ | async" [value]="employee.id">
+      {{employee.id}}}
+    </mat-option>
+  </mat-select>
+ </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select a room</mat-label>
+    <mat-select formControlName="roomID">
+      <mat-option *ngFor="let room of rooms$ | async" [value]="room.id">
+        {{room.name}}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </mat-dialog-content>
 
 

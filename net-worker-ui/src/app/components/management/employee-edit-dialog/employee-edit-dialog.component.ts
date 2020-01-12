@@ -18,7 +18,7 @@ export class EmployeeEditDialogComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<EmployeeEditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) data) {
-    this.dialogTitle = data.mode == EditorMode.CREATE ? "Create new employee" : "Edit employee";
+    this.dialogTitle = data.mode === EditorMode.CREATE ? "Create new employee" : "Edit employee";
     this.employeeData = data.employee || {};
   }
 
