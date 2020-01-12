@@ -149,6 +149,8 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
                 }
                 System.out.printf("eventName: %s\nmail: %s \nstart: (%s)\nend: %s\n",
                         event.getSummary(), event.getCreator().getEmail(), start, end);
+
+
             }
             pageToken = events.getNextPageToken();
         }while(pageToken != null);
