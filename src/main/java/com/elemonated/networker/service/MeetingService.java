@@ -9,7 +9,6 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +17,6 @@ public class MeetingService {
     private final MeetingRepository meetingRepository;
     private final EmployeeService employeeService;
     private final RoomService roomService;
-
 
 
     @Autowired
@@ -30,42 +28,23 @@ public class MeetingService {
 
     public Meeting addMeeting(MeetingDTO meetingDTO) {
         Meeting meeting = new Meeting();
-        try {
-            Optional<Employee> employeeLeader = employeeService.getEmployeeById(meetingDTO.getEmployeeMeetingLeaderID());
-            if (employeeLeader.isEmpty()) {
-                throw new Exception("brak lidera");
-            }
+        meeting.setSubject(meetingDTO.getSubject());
+
+        Optional<Employee> employeeLeader = employeeService.getEmployeeById(meetingDTO.getEmployeeMeetingLeaderID());
+        if (employeeLeader.isPresent()) {
             meeting.setEmployeeMeetingLeader(employeeLeader.get());
+        }
 
-            for (Long id : meetingDTO.getEmployeesParticipantsID()) {
-                Optional<Employee> employee = employeeService.getEmployeeById(id);
-                if (employee.isEmpty()) {
-                    throw new Exception("brak zbioru uczesnikow");
-                }
-                meeting.getEmployeesParticipants().add(employee.get());
-            }
-            Optional<Room> room = roomService.getRoomById(meetingDTO.getRoomID());
-            if (room.isEmpty()) {
-                throw new Exception("brak pokoju");
-            }
+        Optional<Room> room = roomService.getRoomById(meetingDTO.getRoomID());
+        if (room.isPresent()) {
             meeting.setRoom(room.get());
-            meeting.setSubject(meetingDTO.getSubject());
-            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampStartLong());
-            meeting.setSqlTimestampStart(sqlTimestampNew);
-            sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampEndLong());
-            meeting.setSqlTimestampEnd(sqlTimestampNew);
-
-
         }
-        catch(Exception e)
-        {
-            Meeting meetingMock = new Meeting();
-            meetingMock.setSubject(e.getMessage());
-            return meetingRepository.save(meetingMock);
 
-        }
+//            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampStartLong());
+//            meeting.setSqlTimestampStart(sqlTimestampNew);
+//            sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampEndLong());
+//            meeting.setSqlTimestampEnd(sqlTimestampNew);
         return meetingRepository.save(meeting);
-
     }
 
     public void deleteMeeting(long id) {

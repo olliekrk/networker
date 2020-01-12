@@ -1,15 +1,17 @@
 package com.elemonated.networker.model;
 
-import com.elemonated.networker.persistence.data.Employee;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Set;
 
-import com.elemonated.networker.persistence.data.Room;
-import lombok.Data;
-
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MeetingDTO {
+
+    private long id;
 
     private long employeeMeetingLeaderID;
 
@@ -20,9 +22,8 @@ public class MeetingDTO {
     private String subject;
 
     //https://www.baeldung.com/hibernate-date-time
-    private Long utilTimestampStartLong;
-    private Long utilTimestampEndLong;
-
-
+//    private Long utilTimestampStartLong;
+//
+//    private Long utilTimestampEndLong;
 
 }
