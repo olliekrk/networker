@@ -1,10 +1,10 @@
 import {Component, Input} from "@angular/core";
-import {Employee, getReadableEmployeeName} from "../../../model/employee";
 import {MatDialog} from "@angular/material";
-import {EditorMode} from "../../../model/utils";
 import {EmployeeEditDialogComponent} from "../employee-edit-dialog/employee-edit-dialog.component";
 import {filter, switchMap, tap} from "rxjs/operators";
-import {EmployeesService} from "../../../services/employees.service";
+import {EditorMode} from "../../../../model/utils";
+import {Employee, getReadableEmployeeName} from "../../../../model/employee";
+import {EmployeesService} from "../../../../services/employees.service";
 
 @Component({
   selector: "app-employee-info-bar",

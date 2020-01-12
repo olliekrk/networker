@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Id</mat-label>
+    <input [(ngModel)]="inputId" matInput>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button (click)="close()" mat-raised-button>Close</button>
+  <button (click)="save()" color="primary" mat-raised-button>Import</button>
+</mat-dialog-actions>

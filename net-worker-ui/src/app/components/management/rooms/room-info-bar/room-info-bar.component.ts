@@ -1,10 +1,10 @@
 import {Component, Input} from "@angular/core";
-import {Room} from "../../../model/room";
 import {MatDialog} from "@angular/material";
-import {EditorMode} from "../../../model/utils";
 import {RoomEditDialogComponent} from "../room-edit-dialog/room-edit-dialog.component";
 import {filter, switchMap, tap} from "rxjs/operators";
-import {RoomService} from "../../../services/room.service";
+import {Room} from "../../../../model/room";
+import {RoomService} from "../../../../services/room.service";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-room-info-bar",

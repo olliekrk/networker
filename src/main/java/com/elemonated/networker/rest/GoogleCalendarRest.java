@@ -16,12 +16,12 @@ public class GoogleCalendarRest {
     private final GoogleCalendarObserverService googleCalendarObserverService;
 
     @Autowired
-    private GoogleCalendarRest(GoogleCalendarObserverService googleCalendarObserverService){
+    private GoogleCalendarRest(GoogleCalendarObserverService googleCalendarObserverService) {
         this.googleCalendarObserverService = googleCalendarObserverService;
     }
 
     @PostMapping
-    public GoogleCalendar addCalendar(@RequestParam String calendarName){
+    public GoogleCalendar addCalendar(@RequestParam String calendarName) {
         try {
             return googleCalendarObserverService.subscribeCalendar(calendarName);
         } catch (IOException e) {
@@ -32,7 +32,7 @@ public class GoogleCalendarRest {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteCalendar(@RequestParam String calendarName){
+    public ResponseEntity<String> deleteCalendar(@RequestParam String calendarName) {
         try {
             googleCalendarObserverService.deleteCalendar(calendarName);
 

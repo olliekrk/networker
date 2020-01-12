@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div *ngFor="let calendarId of calendars$ | async">
+    {{calendarId}}
+  </div>
+
+  <button (click)="importCalendarDialog()" mat-raised-button>
+    <mat-icon>add</mat-icon>
+    Add new calendar to watchlist
+  </button>
+</div>

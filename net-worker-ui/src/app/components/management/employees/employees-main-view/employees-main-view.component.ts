@@ -2,10 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material";
 import {EmployeeEditDialogComponent} from "../employee-edit-dialog/employee-edit-dialog.component";
 import {filter, switchMap, take, tap} from "rxjs/operators";
-import {EmployeesService} from "../../../services/employees.service";
-import {EditorMode} from "../../../model/utils";
-import {Employee} from "../../../model/employee";
 import {Observable} from "rxjs";
+import {Employee} from "../../../../model/employee";
+import {EmployeesService} from "../../../../services/employees.service";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-employees-main-view",

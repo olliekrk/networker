@@ -21,6 +21,10 @@ export class NavigationBarComponent {
       label: "Dashboard",
     },
     {
+      path: "/googleIntegration",
+      label: "Google Integration",
+    },
+    {
       path: "/presence",
       label: "Presence data",
     },

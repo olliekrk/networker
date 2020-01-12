@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {EditorMode} from "../../../model/utils";
-import {Employee} from "../../../model/employee";
+import {EditorMode} from "../../../../model/utils";
+import {Employee} from "../../../../model/employee";
 
 @Component({
   selector: "app-employee-edit-dialog",

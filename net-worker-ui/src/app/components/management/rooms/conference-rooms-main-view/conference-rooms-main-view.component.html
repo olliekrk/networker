@@ -1,6 +1,5 @@
 <div *ngFor="let room of rooms$ | async; let i = index" class="room-list">
   <app-room-info-bar [room]="room" [index]="i"></app-room-info-bar>
-<!--  {{room| json}}-->
 </div>
 
 <button (click)="createRoomDialog()" [matTooltipPosition]="'left'" [matTooltip]="'Add new room'" mat-fab>

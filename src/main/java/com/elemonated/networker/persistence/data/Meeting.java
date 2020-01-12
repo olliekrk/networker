@@ -4,8 +4,6 @@ import com.elemonated.networker.model.MeetingDTO;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,14 +11,12 @@ import java.util.stream.Collectors;
 @Entity
 public class Meeting {
 
-
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
     private Room room;
-
 
     @ManyToOne
     private Employee employeeMeetingLeader;
@@ -35,18 +31,14 @@ public class Meeting {
 
     private java.sql.Timestamp sqlTimestampEnd;
 
-
-    public MeetingDTO toDTO()
-    {
+    public MeetingDTO toDTO() {
 
         long leaderID = 0;
-        if(employeeMeetingLeader != null)
-        {
+        if (employeeMeetingLeader != null) {
             leaderID = employeeMeetingLeader.getId();
         }
         long roomID = 0;
-        if(room != null)
-        {
+        if (room != null) {
             roomID = room.getId();
         }
 
@@ -57,9 +49,5 @@ public class Meeting {
                 roomID,
                 subject);
     }
-
-
-
-
 
 }

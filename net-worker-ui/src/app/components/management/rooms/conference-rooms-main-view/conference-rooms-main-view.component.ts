@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material";
 import {RoomEditDialogComponent} from "../room-edit-dialog/room-edit-dialog.component";
-import {filter, switchMap, take, tap} from "rxjs/operators";
-import {RoomService} from "../../../services/room.service";
-import {EditorMode} from "../../../model/utils";
-import {Room} from "../../../model/room";
+import {filter, switchMap, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {Room} from "../../../../model/room";
+import {RoomService} from "../../../../services/room.service";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-conference-rooms-main-view",
@@ -16,7 +16,6 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
 
   rooms$: Observable<Room[]>;
 
-
   constructor(private dialog: MatDialog,
               private roomsService: RoomService) {
   }
@@ -24,7 +23,6 @@ export class ConferenceRoomsMainViewComponent implements OnInit {
   ngOnInit() {
     this.rooms$ = this.roomsService.getRooms();
   }
-
 
   createRoomDialog(): void {
     const data = {

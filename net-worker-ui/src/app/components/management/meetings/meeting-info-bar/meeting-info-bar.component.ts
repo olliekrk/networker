@@ -1,10 +1,10 @@
 import {Component, Input} from "@angular/core";
-import {Meeting} from "../../../model/meeting";
 import {MatDialog} from "@angular/material";
-import {EditorMode} from "../../../model/utils";
 import {MeetingEditDialogComponent} from "../meeting-edit-dialog/meeting-edit-dialog.component";
 import {filter, switchMap, tap} from "rxjs/operators";
-import {MeetingService} from "../../../services/meeting.service";
+import {Meeting} from "../../../../model/meeting";
+import {MeetingService} from "../../../../services/meeting.service";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-meeting-info-bar",

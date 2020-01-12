@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material";
 import {MeetingEditDialogComponent} from "../meeting-edit-dialog/meeting-edit-dialog.component";
-import {filter, switchMap, take, tap} from "rxjs/operators";
-import {MeetingService} from "../../../services/meeting.service";
-import {EditorMode} from "../../../model/utils";
-import {Meeting} from "../../../model/meeting";
+import {filter, switchMap, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {Meeting} from "../../../../model/meeting";
+import {MeetingService} from "../../../../services/meeting.service";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-meetings-main-view",
@@ -15,6 +15,7 @@ import {Observable} from "rxjs";
 export class MeetingsMainViewComponent implements OnInit {
 
   meetings$: Observable<Meeting[]>;
+
   constructor(private dialog: MatDialog,
               private meetingService: MeetingService) {
   }
@@ -22,6 +23,7 @@ export class MeetingsMainViewComponent implements OnInit {
   ngOnInit() {
     this.meetings$ = this.meetingService.getMeetings();
   }
+
   createMeetingDialog(): void {
     const data = {
       mode: EditorMode.CREATE

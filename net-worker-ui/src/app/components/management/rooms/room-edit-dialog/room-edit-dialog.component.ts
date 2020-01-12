@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {EditorMode} from "../../../model/utils";
-import {Room} from "../../../model/room";
+import {Room} from "../../../../model/room";
+import {EditorMode} from "../../../../model/utils";
 
 @Component({
   selector: "app-room-edit-dialog",

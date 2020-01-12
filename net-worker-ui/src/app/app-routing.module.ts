@@ -3,9 +3,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {SettingsPanelComponent} from "./components/settings-panel/settings-panel.component";
 import {CredentialsComponent} from "./components/credentials/credentials.component";
-import {EmployeesMainViewComponent} from "./components/management/employees-main-view/employees-main-view.component";
-import {MeetingsMainViewComponent} from "./components/management/meetings-main-view/meetings-main-view.component";
 import {PresenceHoursPanelComponent} from "./components/presence-hours-panel/presence-hours-panel.component";
+import {GoogleIntegrationPanelComponent} from "./components/google-integration/google-integration-panel/google-integration-panel.component";
 
 
 const routes: Routes = [
@@ -23,20 +22,16 @@ const routes: Routes = [
     component: PresenceHoursPanelComponent
   },
   {
+    path: "googleIntegration",
+    component: GoogleIntegrationPanelComponent
+  },
+  {
     path: "settings",
     component: SettingsPanelComponent
   },
   {
     path: "credentials",
     component: CredentialsComponent
-  },
-  {
-    path: "employees",
-    component: EmployeesMainViewComponent
-  },
-  {
-    path: "meetings",
-    component: MeetingsMainViewComponent
   },
 ];
 
