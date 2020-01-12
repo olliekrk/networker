@@ -49,6 +49,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
     private Calendar service;
     private Set<GoogleCalendar> calendars = new CopyOnWriteArraySet<>();
     private final GoogleCalendarRepository googleCalendarRepository;
+    private final ActivityService activityService;
 
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -62,8 +63,10 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
     @Autowired
-    private GoogleCalendarObserverService(GoogleCalendarRepository googleCalendarRepository) {
+    private GoogleCalendarObserverService(GoogleCalendarRepository googleCalendarRepository,
+                                          ActivityService activityService) {
         this.googleCalendarRepository = googleCalendarRepository;
+        this.activityService = activityService;
         for (GoogleCalendar calendar: googleCalendarRepository.findAll()){
             calendars.add(calendar);
         }
@@ -177,6 +180,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
         GoogleCalendar calendar = new GoogleCalendar(getCalendarIdFromHttp(calendarName), calendarName);
         if (calendars.add(calendar)) {
             googleCalendarRepository.save(calendar);
+            checkForUpdatesInCalendar(calendar);
             return calendar;
         } else {
             throw new Exception("Could not add calendar.");
