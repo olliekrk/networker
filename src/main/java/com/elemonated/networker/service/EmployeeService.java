@@ -44,4 +44,9 @@ public class EmployeeService {
         logger.info("Getting all employees");
         return Lists.newArrayList(employeeRepository.findAll());
     }
+
+    public Employee findByEmail(String email)
+    {
+        return employeeRepository.findByEmail(email);
+    }
 }

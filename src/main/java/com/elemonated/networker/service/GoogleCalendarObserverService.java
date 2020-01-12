@@ -1,6 +1,7 @@
 package com.elemonated.networker.service;
 
 import com.elemonated.networker.NetApplication;
+import com.elemonated.networker.persistence.data.Activity;
 import com.elemonated.networker.persistence.data.GoogleCalendar;
 import com.elemonated.networker.persistence.repository.GoogleCalendarRepository;
 import com.google.api.client.auth.oauth2.Credential;
@@ -30,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +52,7 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
     private Set<GoogleCalendar> calendars = new CopyOnWriteArraySet<>();
     private final GoogleCalendarRepository googleCalendarRepository;
     private final ActivityService activityService;
+    private final EmployeeService employeeService;
 
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -64,9 +67,10 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
 
     @Autowired
     private GoogleCalendarObserverService(GoogleCalendarRepository googleCalendarRepository,
-                                          ActivityService activityService) {
+                                          ActivityService activityService, EmployeeService employeeService) {
         this.googleCalendarRepository = googleCalendarRepository;
         this.activityService = activityService;
+        this.employeeService = employeeService;
         for (GoogleCalendar calendar: googleCalendarRepository.findAll()){
             calendars.add(calendar);
         }
@@ -149,6 +153,13 @@ public class GoogleCalendarObserverService implements CommandLineRunner {
                 }
                 System.out.printf("eventName: %s\nmail: %s \nstart: (%s)\nend: %s\n",
                         event.getSummary(), event.getCreator().getEmail(), start, end);
+                ///////////////////////////////////////////////////////////////////////
+                Activity activity = new Activity();
+                activity.setStartTimestamp(new Timestamp(start.getValue()));
+                activity.setEndTimestamp(new Timestamp(end.getValue()));
+                activity.setEmployee(employeeService.findByEmail(event.getCreator().getEmail()));
+                activityService.saveActivity(activity);
+
 
 
             }

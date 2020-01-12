@@ -65,6 +65,11 @@ public class ActivityService {
         return activityRepository.save(activity);
     }
 
+
+    public Activity saveActivity(Activity activity) {
+        return activityRepository.save(activity);
+    }
+
     public PresenceData getPresenceDataForEmployee(Long employeeId) {
         List<Activity> employeeActivities = activityRepository.findByEmployee_id(employeeId);
 
