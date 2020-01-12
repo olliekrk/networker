@@ -65,7 +65,7 @@ public class GoogleAuthorizationService {
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
                 .setAccessType("online")
                 .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(4200).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 }

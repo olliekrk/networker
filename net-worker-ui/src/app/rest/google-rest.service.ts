@@ -22,7 +22,7 @@ export class GoogleRestService {
   }
 
   deleteCalendar(calendarId: GoogleCalendarId): Observable<void> {
-    const params = new HttpParams().set("calendarName", calendarId);
+    const params = new HttpParams().set("calendarId", calendarId);
     return this.httpClient.delete<void>(this.calendarUrl, {params});
   }
 }

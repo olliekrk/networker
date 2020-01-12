@@ -21,6 +21,7 @@ export class GoogleIntegrationPanelComponent implements OnInit {
 
   ngOnInit() {
     this.calendars$ = this.googleService.getCalendarIds();
+    this.googleService.reloadCalendars();
   }
 
   importCalendarDialog(): void {

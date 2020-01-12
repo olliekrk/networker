@@ -40,14 +40,14 @@ public class GoogleCalendarRest {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteCalendar(@RequestParam String calendarName) {
+    public ResponseEntity<String> deleteCalendar(@RequestParam String calendarId) {
         try {
-            googleCalendarObserverService.deleteCalendar(calendarName);
+            googleCalendarObserverService.deleteCalendar(calendarId);
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
-        return new ResponseEntity<>(calendarName, HttpStatus.OK);
+        return new ResponseEntity<>(calendarId, HttpStatus.OK);
     }
 
     @RequestMapping("/auth")

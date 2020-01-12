@@ -128,7 +128,7 @@ public class GoogleCalendarObserverService {
                     start = event.getStart().getDate();
                 }
                 DateTime end = event.getEnd().getDateTime();
-                if (start == null) {
+                if (end == null) {
                     end = event.getEnd().getDate();
                 }
                 System.out.printf("eventName: %s\nmail: %s \nstart: (%s)\nend: %s\n",
@@ -180,14 +180,12 @@ public class GoogleCalendarObserverService {
         }
     }
 
-    public void deleteCalendar(String calendarName) throws Exception {
-        for (GoogleCalendar calendar : calendars) {
-            if (calendar.getCalendarSummary().equals(calendarName)) {
-                googleCalendarRepository.deleteById(calendar.getCalendarId());
+    public void deleteCalendar(String calendarId) throws Exception {
+        for(GoogleCalendar calendar: calendars) {
+            if(calendar.getCalendarId().equals(calendarId))
                 calendars.remove(calendar);
-                return;
-            }
         }
-        throw new Exception("Calendar not found");
+        googleCalendarRepository.deleteById(calendarId);
+
     }
 }

@@ -13,7 +13,7 @@ export class GoogleService {
   }
 
   importCalendar(calendarId: GoogleCalendarId): Observable<GoogleCalendarId> {
-    return this.googleRestService.importCalendar(calendarId);
+    return this.googleRestService.importCalendar(calendarId).pipe(share());
   }
 
   reloadCalendars(): void {
