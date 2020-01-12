@@ -1,6 +1,7 @@
 package com.elemonated.networker.rest;
 
 import com.elemonated.networker.persistence.data.GoogleCalendar;
+import com.elemonated.networker.service.GoogleAuthorizationService;
 import com.elemonated.networker.service.GoogleCalendarObserverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,8 @@ public class GoogleCalendarRest {
     private final GoogleCalendarObserverService googleCalendarObserverService;
 
     @Autowired
-    private GoogleCalendarRest(GoogleCalendarObserverService googleCalendarObserverService) {
+    private GoogleCalendarRest(GoogleCalendarObserverService googleCalendarObserverService,
+                               GoogleAuthorizationService googleAuthorizationService){
         this.googleCalendarObserverService = googleCalendarObserverService;
     }
 
@@ -46,5 +48,17 @@ public class GoogleCalendarRest {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         }
         return new ResponseEntity<>(calendarName, HttpStatus.OK);
+    }
+
+    @RequestMapping("/auth")
+    public ResponseEntity<String> requestCalendarAuthorization(){
+        if(googleCalendarObserverService.getService() == null){
+            try{
+                googleCalendarObserverService.setService();
+            }catch(Exception e){
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN, e.getMessage(), e);
+            }
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }

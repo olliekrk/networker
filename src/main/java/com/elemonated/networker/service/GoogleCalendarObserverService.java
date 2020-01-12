@@ -42,72 +42,44 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 
 @Component
-public class GoogleCalendarObserverService implements CommandLineRunner {
-    @Override
-    public void run(String... args) throws Exception {
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        this.service = new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                .setApplicationName(APPLICATION_NAME)
-                .build();
-
-    }
-
-    private Calendar service;
-    private Set<GoogleCalendar> calendars = new CopyOnWriteArraySet<>();
-    private final GoogleCalendarRepository googleCalendarRepository;
-    private final ActivityService activityService;
-    private final EmployeeService employeeService;
-
-    private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
-    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
-
-    /**
-     * Global instance of the scopes required by this quickstart.
-     * If modifying these scopes, delete your previously saved tokens/ folder.
-     */
-    private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR_READONLY);
-    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-
+public class GoogleCalendarObserverService {
     @Autowired
     private GoogleCalendarObserverService(GoogleCalendarRepository googleCalendarRepository,
-                                          ActivityService activityService, EmployeeService employeeService) {
+                                          ActivityService activityService,
+                                          GoogleAuthorizationService googleAuthorizationService,
+                                          EmployeeService employeeService) {
         this.googleCalendarRepository = googleCalendarRepository;
         this.activityService = activityService;
+        this.googleAuthorizationService = googleAuthorizationService;
         this.employeeService = employeeService;
         for (GoogleCalendar calendar: googleCalendarRepository.findAll()){
             calendars.add(calendar);
         }
     }
 
-    /**
-     * Creates an authorized Credential object.
-     *
-     * @param HTTP_TRANSPORT The network HTTP Transport.
-     * @return An authorized Credential object.
-     * @throws IOException If the credentials.json file cannot be found.
-     */
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        // Load client secrets.
-        InputStream in = NetApplication.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        if (in == null) {
-            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
-        }
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+    private final GoogleAuthorizationService googleAuthorizationService;
+    private Calendar service;
+    private Set<GoogleCalendar> calendars = new CopyOnWriteArraySet<>();
+    private final GoogleCalendarRepository googleCalendarRepository;
+    private final ActivityService activityService;
+    private final EmployeeService employeeService;
 
-        // Build flow and trigger user authorization request.
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
-                .setAccessType("online")
-                .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+    public void setService() throws Exception{
+        this.service = googleAuthorizationService.getCalendarService();
+    }
+
+    public Calendar getService(){
+        return service;
     }
 
     @Scheduled(fixedRate = 5000)
     public void checkForUpdates() {
-        if (service == null) {
+        if(service == null){
+            try{
+                this.setService();
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
             return;
         }
         for (GoogleCalendar calendar : calendars) {
