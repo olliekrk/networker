@@ -11,19 +11,18 @@ import java.util.Set;
 @NoArgsConstructor
 public class MeetingDTO {
 
-    private long id;
+    private Long id;
 
-    private long employeeMeetingLeaderID;
+    private Long employeeMeetingLeaderID;
 
     Set<Long> employeesParticipantsID;
 
-    private long roomID;
+    private Long roomID;
 
     private String subject;
 
-    //https://www.baeldung.com/hibernate-date-time
-//    private Long utilTimestampStartLong;
-//
-//    private Long utilTimestampEndLong;
+    private Long startTimestamp;
+
+    private Long endTimestamp;
 
 }

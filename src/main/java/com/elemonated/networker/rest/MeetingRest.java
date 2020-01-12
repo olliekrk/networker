@@ -2,15 +2,12 @@ package com.elemonated.networker.rest;
 
 
 import com.elemonated.networker.model.MeetingDTO;
-import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Meeting;
-import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.service.MeetingService;
 import com.google.common.primitives.Longs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,40 +22,23 @@ public class MeetingRest {
         this.meetingService = meetingService;
     }
 
-    /*
-    @GetMapping("/mock")
-    public Meeting mockEmployee() {
-        Meeting mock = new Meeting();
-        mock.se("example@dot.com");
-        mock.setPhone("555666777");
-        mock.setFirstName("John");
-        mock.setLastName("Doe");
-        return employeeService.addEmployee(mock);
-    }
-
-     */
-
-
     @PostMapping
-    public Meeting updateMeeting(@RequestBody MeetingDTO meetingDTO){
+    public Meeting saveMeeting(@RequestBody MeetingDTO meetingDTO) {
         return meetingService.addMeeting(meetingDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployeeById(@PathVariable String id){
+    public void deleteEmployeeById(@PathVariable String id) {
         Long idLong = Longs.tryParse(id);
-        if(idLong == null){
-
-        }else{
+        if (idLong != null) {
             meetingService.deleteMeeting(idLong);
         }
     }
 
-
     @GetMapping("/all")
     public List<MeetingDTO> getAllMeetings() {
         List<MeetingDTO> meetingDTOList = new ArrayList<>();
-        for(Meeting m : meetingService.getAllMeetings()) meetingDTOList.add(m.toDTO());
+        for (Meeting m : meetingService.getAllMeetings()) meetingDTOList.add(m.toDTO());
         return meetingDTOList;
     }
 

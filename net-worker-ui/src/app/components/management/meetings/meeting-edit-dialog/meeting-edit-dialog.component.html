@@ -6,13 +6,13 @@
     <input formControlName="subject" matInput>
   </mat-form-field>
   <mat-form-field>
-  <mat-label>Select an employee to be a meeting leader</mat-label>
-  <mat-select formControlName="employeeMeetingLeaderID">
-    <mat-option *ngFor="let employee of employees$ | async" [value]="employee.id">
-      {{getReadableEmployeeName(employee)}}
-    </mat-option>
-  </mat-select>
- </mat-form-field>
+    <mat-label>Select an employee to be a meeting leader</mat-label>
+    <mat-select formControlName="employeeMeetingLeaderID">
+      <mat-option *ngFor="let employee of employees$ | async" [value]="employee.id">
+        {{getReadableEmployeeName(employee)}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-form-field>
     <mat-label>Select a room</mat-label>
     <mat-select formControlName="roomID">
@@ -21,8 +21,19 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-form-field>
+    <mat-label>Meeting start</mat-label>
+    <mat-datetimepicker-toggle [for]="startPicker" matSuffix></mat-datetimepicker-toggle>
+    <mat-datetimepicker #startPicker openOnFocus="true" timeInterval="5" type="datetime"></mat-datetimepicker>
+    <input [matDatetimepicker]="startPicker" autocomplete="false" formControlName="startDateTime" matInput required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Meeting end</mat-label>
+    <mat-datetimepicker-toggle [for]="endPicker" matSuffix></mat-datetimepicker-toggle>
+    <mat-datetimepicker #endPicker openOnFocus="true" timeInterval="5" type="datetime"></mat-datetimepicker>
+    <input [matDatetimepicker]="endPicker" autocomplete="false" formControlName="endDateTime" matInput required>
+  </mat-form-field>
 </mat-dialog-content>
-
 
 <mat-dialog-actions>
   <button (click)="close()" mat-raised-button>Close</button>

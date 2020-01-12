@@ -41,11 +41,19 @@ export class MeetingEditDialogComponent implements OnInit {
       subject: [this.meetingData.subject],
       employeesParticipantsID: [this.meetingData.employeesParticipantsID],
       roomID: [this.meetingData.roomID],
+      startDateTime: [this.meetingData.startTimestamp ? new Date(this.meetingData.startTimestamp) : undefined],
+      endDateTime: [this.meetingData.endTimestamp ? new Date(this.meetingData.endTimestamp) : undefined],
     });
   }
 
   save() {
-    this.dialogRef.close(Object.assign({id: this.meetingData.id}, this.meetingForm.value));
+    const startTimestamp = Date.parse(this.meetingForm.controls.startDateTime.value);
+    const endTimestamp = Date.parse(this.meetingForm.controls.endDateTime.value);
+    this.dialogRef.close(Object.assign(
+      {id: this.meetingData.id},
+      this.meetingForm.value,
+      {startTimestamp: startTimestamp, endTimestamp: endTimestamp}
+    ));
   }
 
   close() {

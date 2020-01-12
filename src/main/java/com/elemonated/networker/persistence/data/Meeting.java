@@ -4,6 +4,8 @@ import com.elemonated.networker.model.MeetingDTO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,28 +28,20 @@ public class Meeting {
 
     private String subject;
 
-    //https://www.baeldung.com/hibernate-date-time
-    private java.sql.Timestamp sqlTimestampStart;
+    private Timestamp startTimestamp;
 
-    private java.sql.Timestamp sqlTimestampEnd;
+    private Timestamp endTimestamp;
 
     public MeetingDTO toDTO() {
-
-        long leaderID = 0;
-        if (employeeMeetingLeader != null) {
-            leaderID = employeeMeetingLeader.getId();
-        }
-        long roomID = 0;
-        if (room != null) {
-            roomID = room.getId();
-        }
-
         return new MeetingDTO(
                 id,
-                leaderID,
+                Optional.ofNullable(employeeMeetingLeader).map(Employee::getId).orElse(null),
                 employeesParticipants.stream().map(Employee::getId).collect(Collectors.toSet()),
-                roomID,
-                subject);
+                Optional.ofNullable(room).map(Room::getId).orElse(null),
+                subject,
+                Optional.ofNullable(startTimestamp).map(Timestamp::getTime).orElse(null),
+                Optional.ofNullable(endTimestamp).map(Timestamp::getTime).orElse(null)
+        );
     }
 
 }

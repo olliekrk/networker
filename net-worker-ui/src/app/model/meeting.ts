@@ -1,4 +1,3 @@
-
 export interface Meeting {
   id?: number;
 
@@ -9,6 +8,10 @@ export interface Meeting {
   roomID?: number;
 
   subject?: string;
+
+  startTimestamp?: number;
+
+  endTimestamp?: number;
 }
 
 

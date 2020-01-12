@@ -1,14 +1,14 @@
 package com.elemonated.networker.service;
 
 import com.elemonated.networker.model.MeetingDTO;
-import com.elemonated.networker.persistence.data.Employee;
 import com.elemonated.networker.persistence.data.Meeting;
-import com.elemonated.networker.persistence.data.Room;
 import com.elemonated.networker.persistence.repository.MeetingRepository;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,24 +30,26 @@ public class MeetingService {
         Meeting meeting = new Meeting();
         meeting.setSubject(meetingDTO.getSubject());
 
-        Optional<Employee> employeeLeader = employeeService.getEmployeeById(meetingDTO.getEmployeeMeetingLeaderID());
-        if (employeeLeader.isPresent()) {
-            meeting.setEmployeeMeetingLeader(employeeLeader.get());
-        }
+        Optional.ofNullable(meetingDTO.getId())
+                .ifPresent(meeting::setId);
 
-        Optional<Room> room = roomService.getRoomById(meetingDTO.getRoomID());
-        if (room.isPresent()) {
-            meeting.setRoom(room.get());
-        }
+        employeeService.getEmployeeById(meetingDTO.getEmployeeMeetingLeaderID()).ifPresent(meeting::setEmployeeMeetingLeader);
 
-//            java.sql.Timestamp sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampStartLong());
-//            meeting.setSqlTimestampStart(sqlTimestampNew);
-//            sqlTimestampNew = new Timestamp(meetingDTO.getUtilTimestampEndLong());
-//            meeting.setSqlTimestampEnd(sqlTimestampNew);
+        Optional.ofNullable(meetingDTO.getRoomID())
+                .flatMap(roomService::getRoomById)
+                .ifPresent(meeting::setRoom);
 
+        Optional.ofNullable(meetingDTO.getStartTimestamp())
+                .map(Instant::ofEpochMilli)
+                .map(Timestamp::from)
+                .ifPresent(meeting::setStartTimestamp);
+
+        Optional.ofNullable(meetingDTO.getEndTimestamp())
+                .map(Instant::ofEpochMilli)
+                .map(Timestamp::from)
+                .ifPresent(meeting::setEndTimestamp);
 
         return meetingRepository.save(meeting);
-
     }
 
     public void deleteMeeting(long id) {

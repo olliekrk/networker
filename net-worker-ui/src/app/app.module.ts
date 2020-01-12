@@ -11,6 +11,7 @@ import {DashboardService} from "./services/dashboard.service";
 import {DashboardRestService} from "./rest/dashboard-rest.service";
 import {CredentialsComponent} from "./components/credentials/credentials.component";
 import {
+  MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
@@ -51,6 +52,7 @@ import {EmployeesMainViewComponent} from "./components/management/employees/empl
 import {GoogleCalendarImportDialogComponent} from "./components/google-integration/google-calendar-import-dialog/google-calendar-import-dialog.component";
 import {GoogleService} from "./services/google.service";
 import {GoogleRestService} from "./rest/google-rest.service";
+import {MatDatetimepickerModule, MatNativeDatetimeModule} from "@mat-datetimepicker/core";
 
 @NgModule({
   declarations: [
@@ -94,6 +96,9 @@ import {GoogleRestService} from "./rest/google-rest.service";
     ChartsModule,
     MatSelectModule,
     FormsModule,
+    MatDatetimepickerModule,
+    MatDatepickerModule,
+    MatNativeDatetimeModule
   ],
   providers: [
     ActivityService,
@@ -110,7 +115,12 @@ import {GoogleRestService} from "./rest/google-rest.service";
     MeetingService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [GoogleCalendarImportDialogComponent, EmployeeEditDialogComponent, RoomEditDialogComponent, MeetingEditDialogComponent]
+  entryComponents: [
+    GoogleCalendarImportDialogComponent,
+    EmployeeEditDialogComponent,
+    RoomEditDialogComponent,
+    MeetingEditDialogComponent
+  ]
 })
 export class AppModule {
 }
